@@ -1,0 +1,20 @@
+---
+- name: Pre Hook Integration Example
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Print pre-hook success message
+      debug:
+        msg: "pre hook ran successfully"
+
+    - name: Display MTV migration context (if provided)
+      debug:
+        msg: |
+          VM Name: {{ vm_name | default('N/A') }}
+          VM ID: {{ vm_id | default('N/A') }}
+          Source VM ID: {{ vm_source_id | default('N/A') }}
+          Plan Name: {{ plan_name | default('N/A') }}
+          Plan Namespace: {{ plan_namespace | default('N/A') }}
+          Migration Phase: {{ migration_phase | default('N/A') }}
