@@ -1,0 +1,18 @@
+# Sample workload.yml: MTV builds the real file from the source VM inventory.
+# This file is only for docs—real content depends on your provider (VMware, oVirt, etc.).
+
+selfLink: /providers/boston/workloads/vm-2861
+id: vm-2861
+name: my-vm
+cluster:
+  id: cluster-01
+  name: prod-cluster
+datacenter:
+  id: dc-01
+  name: DC1
+hostName: esxi01.example.com
+guestName: Red Hat Enterprise Linux 8 (64-bit)
+ipAddress: 192.0.2.10
+cpuCount: 4
+memoryMB: 8192
+# … more fields in a real file …

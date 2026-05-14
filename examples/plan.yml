@@ -1,0 +1,35 @@
+# Illustrative plan.yml for MTV embedded hooks (Hook CR with inline playbook).
+#
+# Populated by: Forklift YAML-marshals the Plan custom resource .spec only into the
+# hook ConfigMap key plan.yml (pkg/controller/plan/hook.go plan() — yaml.Marshal(r.Plan.Spec)).
+#
+# This is the migration Plan desired state (mapping, providers, VM list with hooks,
+# target namespace, etc.), not status. Your playbook typically loads it with
+# include_vars: file=plan.yml name=plan and reads e.g. plan.targetNamespace.
+
+description: Example migration plan
+# Namespace on the *destination cluster* where migrated VMs/PVCs are created.
+targetNamespace: my-migrated-vms
+provider:
+  source:
+    namespace: openshift-mtv
+    name: source-vmware
+  # References Forklift *Provider* CRs (inventory endpoints), not “where VMs land”.
+  destination:
+    namespace: openshift-mtv
+    name: host
+map:
+  network:
+    name: net-map
+    namespace: openshift-mtv
+  storage:
+    name: storage-map
+    namespace: openshift-mtv
+vms:
+  - id: vm-2861
+    hooks:
+      - step: PreHook
+        hook:
+          namespace: openshift-mtv
+          name: my-hook
+# … additional VM entries and Plan.spec fields omitted …
