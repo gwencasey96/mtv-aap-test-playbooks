@@ -1,0 +1,18 @@
+# Illustrative Ansible extra variables for MTV hooks when using Ansible Automation
+# Platform (AAP/AWX) with spec.aap.jobTemplateId.
+#
+# MTV does not mount this path as a file on the controller. The Forklift migration
+# controller passes these key/value pairs as job template "extra variables" when it
+# launches the job (see Forklift pkg/controller/plan/hook.go aapJobExtraVars).
+#
+# For embedded/in-cluster playbook hooks (copy-paste playbook on the Hook CR),
+# there is no separate vm.yml; VM details appear in workload.yml (inventory) and
+# in plan.yml (Plan.spec), and these same names are not automatically mirrored
+# as Ansible vars unless your playbook loads them from those files.
+
+vm_id: vm-2861
+vm_name: my-vm
+vm_source_id: vm-2861
+plan_name: example-plan
+plan_namespace: openshift-mtv
+migration_phase: PreHook
